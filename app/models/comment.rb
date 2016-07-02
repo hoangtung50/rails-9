@@ -5,6 +5,9 @@ class Comment < ApplicationRecord
   has_many   :likes
   belongs_to :user
 
+  validates :content, presence: true
+  validates :user_id, presence: true
+
   def root?
     parent.nil?
   end

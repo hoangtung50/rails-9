@@ -1,0 +1,6 @@
+#comments-index-container
+  .container
+    .comments-form
+      = render partial: 'comments/form', locals: { comment: Comment.new, :is_edit => false}
+    .comments-listing
+      = render partial: 'comments/listing', locals: { comments: @comments }

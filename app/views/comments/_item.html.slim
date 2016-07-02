@@ -1,0 +1,17 @@
+.comments-item-container
+  .review-content class="comment-#{comment.id}"
+    p = comment.content
+    p = comment.root? ? "Started by" : "Replied by"
+    strong 
+      = l(comment.created_at, format: '%B, %d %Y %H:%M:%S')
+  .edit-comment-content class="comment-#{comment.id}"
+  .comment-controls class="comment-#{comment.id}"
+    = link_to "Edit", edit_comment_path(comment), remote: true, class: 'btn-edit'
+    = link_to "Reply", reply_comment_path(comment), remote: true, class: 'btn-reply'
+    = link_to 'Delete', comment_path(comment),
+     data: {:confirm => 'Are you sure?'}, :method => :delete, remote: true, class: 'btn-delete'
+    - if comment.not_like_by?(current_user)
+      = link_to "Like", like_comment_path(comment), remote: true, class: 'btn-reply'
+    - else
+      = link_to "Dislike", dislike_comment_path(comment), remote: true, class: 'btn-reply'
+    = "#{comment.count_liked} liked"

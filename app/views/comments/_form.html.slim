@@ -1,0 +1,15 @@
+.comments-form-container
+  = simple_form_for comment, :remote => true  do |f|
+    .form-inputs
+      = f.hidden_field :parent_id, :value => comment.parent_id
+      = f.hidden_field :user_id, :value => current_user.id
+      = f.text_area :content,:placeholder => "Write your comment here ",:class => 'form-control', :rows => 4
+    .form-actions.pull-right
+      = f.submit "Cancel", class: "btn btn-cancel #{is_edit ? "edit-comment-#{comment.id}" : "new-comment-for-#{comment.parent_id}"}", :type => "reset"
+      = f.submit "Submit", class: "btn btn-submit #{is_edit ? "edit-comment-#{comment.id}" : "new-comment-for-#{comment.parent_id}"}"
+javascript:
+  $('.btn-cancel').click(function() {
+    $(this).closest('.comments-form-container').hide();
+    $(this).closest('.comment-item').find(".comment-controls").show();
+    $(this).closest('.comment-item').find(".review-content").show();
+  })

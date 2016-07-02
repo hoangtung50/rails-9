@@ -1,0 +1,2 @@
+$(".comment-controls.comment-<%= @comment.id %>").hide();
+$(".reply-comment-content.comment-<%= @comment.id %>").html("<%= escape_javascript(render partial: 'comments/form', :locals => {:comment => @comment.replies.new, :is_edit => false}) %>");

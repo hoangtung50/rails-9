@@ -1,0 +1,15 @@
+.comments-listing-container
+  - comments.includes(:user).order(created_at: :desc).each do |comment|
+    .row
+      .col-md-12.col-xs-12
+        .comment-item class="comment-#{comment.id}"
+          = render partial: 'comments/item', locals: { comment: comment }
+          .row
+            .col-md-2.col-xs-2
+            .col-md-10.col-xs-10
+              .replies 
+                .reply-comment-content class="comment-#{comment.id}"
+                = render partial: 'comments/listing', locals: { comments: comment.replies }
+                  
+
+  
